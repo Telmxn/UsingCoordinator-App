@@ -65,6 +65,53 @@ class UploadFilesViewController: BaseViewController {
         return button
     }()
     
+    private var centerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 24
+        return view
+    }()
+    
+    private var uploadFilesStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 16
+        view.alignment = .center
+        view.distribution = .fillProportionally
+        return view
+    }()
+    
+    private var uploadFilesImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = .uploadFiles
+        return view
+    }()
+    
+    private var uploadFilesTextStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 4
+        view.distribution = .fillProportionally
+        view.alignment = .center
+        return view
+    }()
+    
+    private var uploadFilesTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sənədləri yüklə"
+        label.textColor = .black
+        label.font = UIFont(name: Fonts.interMedium.rawValue, size: 18)
+        return label
+    }()
+    
+    private var uploadFilesSubtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Format: .jpeg, .png, .pdf"
+        label.textColor = .onsurfaceSecondary
+        label.font = UIFont(name: Fonts.interRegular.rawValue, size: 16)
+        return label
+    }()
+    
     init(viewModel: UploadFilesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -120,10 +167,15 @@ class UploadFilesViewController: BaseViewController {
     }
     
     private func setupUI() {
-        view.addSubviews(titleView, uploadButtonView)
+        view.addSubviews(titleView, centerView, uploadButtonView)
         titleView.addSubview(titleStackView)
         [titleLabel, priceLabel].forEach(titleStackView.addArrangedSubview)
         uploadButtonView.addSubview(uploadButton)
+        
+        centerView.addSubview(uploadFilesStackView)
+        
+        [uploadFilesImageView, uploadFilesTextStackView].forEach(uploadFilesStackView.addArrangedSubview)
+        [uploadFilesTitleLabel, uploadFilesSubtitleLabel].forEach(uploadFilesTextStackView.addArrangedSubview)
         
         titleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -134,6 +186,12 @@ class UploadFilesViewController: BaseViewController {
             make.edges.equalToSuperview().inset(20)
         }
         
+        centerView.snp.makeConstraints { make in
+            make.top.equalTo(titleView.snp.bottom).offset(4)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(uploadButtonView.snp.top).offset(-4)
+        }
+        
         uploadButtonView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalToSuperview()
@@ -142,6 +200,11 @@ class UploadFilesViewController: BaseViewController {
         uploadButton.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(20)
             make.height.equalTo(56)
+        }
+        
+        uploadFilesStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(12)
+            make.horizontalEdges.equalToSuperview()
         }
     }
 }
