@@ -5,4 +5,10 @@
 //  Created by Telman Yusifov on 18.05.25.
 //
 
-import Foundation
+import UIKit
+
+extension UICollectionViewCell {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}

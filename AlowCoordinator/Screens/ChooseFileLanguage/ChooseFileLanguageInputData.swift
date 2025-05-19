@@ -1,5 +1,5 @@
 //
-//  ChooseUploadFileLanguageInputData.swift
+//  ChooseFileLanguageInputData.swift
 //  AlowCoordinator
 //
 //  Created by Telman Yusifov on 18.05.25.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ChooseUploadFileLanguageInputData {
+struct ChooseFileLanguageInputData {
     let service: ServiceModel
 }

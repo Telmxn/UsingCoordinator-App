@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct UploadFilesInputData {
+    let service: ServiceModel
+}
